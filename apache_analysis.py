@@ -135,8 +135,6 @@ ua_dict = defaultdict(int)  # 这是记录 agent 出现次数的字典，对于 
 
 
 def user_agent(buffer):
-    print(buffer[0])
-    threading.Event().wait(100)
     for i in buffer:
         ua = i['useragent']
         ua_dict[(ua.browser.family, ua.browser.version_string)] += 1
@@ -164,7 +162,7 @@ if __name__ == '__main__':
     # 注册 handler，时间(s)：时间窗口的间隔、宽度
     # 日志会以一个时间窗口为单位，分发到注册的 handler
     # 日志已经被格式化完毕，handler 只要按自己的需求提取并选择如何处理即可
-    # reg(handler_status, 5, 5)  # 负责统计状态码
+    reg(handler_status, 5, 5)  # 负责统计状态码
     reg(user_agent, 5, 5)  # 负责统计 agent 信息
 
     # 启动
